@@ -1,0 +1,53 @@
+MSA Cheat Sheet
+
+Practical 4
+
+======================================================================================================
+Part 0: Perform following operations on "labs.paly-with-docker.com"
+======================================================================================================
+
+Step 1:
+$ docker --verion
+
+Step 2:
+$ docker pull hello-world
+
+Step 3:
+$ docker images
+
+======================================================================================================
+Part 1: Pull and push mage in docker
+======================================================================================================
+
+Step 1: Login "hub.docker.com" and create a repository "repo1" with description "my first repository".
+
+Step 2: In "labs.paly-with-docker.com" and login into docker account
+$ docker login --username <username>
+password:
+
+Step 3: Tag image in docker.
+$ docker tag <image id> <username>/repo1: firsttry
+  
+Step 4: Push the image in docker.
+$ docker push <username>/repo1:firsttry
+
+Step 5: In "hub.docker.com" check if tag is created.
+
+======================================================================================================
+Part 2: Buid an image and push in docker.
+======================================================================================================
+
+Step 1: In "labs.paly-with-docker.com" type below commands.
+cat > Dockerfile <<EOF
+FROM busybox
+CMD echo "Hello World! This is my first Docker image."
+EOF
+
+Step 2: Build the image in docker.
+$ docker build –t <username>/repo2 .
+
+Step 3: Push the image in docker.
+$ docker push <username>/repo1
+
+Step 4: Check in "hub.docker.com" and then run the docker.
+$ docker run <username>/repo1

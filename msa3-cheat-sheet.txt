@@ -1,0 +1,27 @@
+MSA Cheat Sheet
+
+Practical 3
+
+Step 1: Check if docker is installed.
+> docker
+
+Step 2: Check docker version.
+> docker --version
+
+Step 3: Run hello-world image.
+> docker run -p 8080:8080 dotnetcoreservices/hello-world
+
+Step 4: Run localhost in the browser.
+http://localhost:8080
+
+Step 5: Check output in cmd.
+> curl http://localhost:8080/will/it/blend?
+
+Step 6: See images in docker.
+> docker ps
+
+Step 7: Terminate the image in docker. Use container id in below command.
+> docker kill <container-id>
+
+Step 8: Check if image is terminated.
+> docker ps

@@ -1,0 +1,63 @@
+MSA Cheat Sheet
+
+Practical 1
+
+Step 1: In your command prompt, run the following command to create your app:
+> dotnet new console -o HelloWorld -f net6.0
+
+Step 2: A folder name HelloWorld will be created. Open the folder and edit the HelloWorld.scproj file, add below code in it.
+
+<ItemGroup>
+<PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.1.1"/>
+<PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="1.1.1"/>
+<PackageReference Include="Microsoft.Extensions.Logging" Version="1.1.1"/>
+<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="1.1.1"/>
+<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="1.1.1"/>
+<PackageReference Include="Microsoft.Extensions.Configuration.CommandLine" Version="1.1.1"/>
+</ItemGroup>
+
+Step 3: Open the folder and edit the Program.cs file, add below code in it.
+
+using System;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
+namespace HelloWorld // Note: actual namespace depends on the project name.
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            var config = new ConfigurationBuilder()
+            .AddCommandLine(args)
+            .Build();
+            var host = new WebHostBuilder()
+            .UseKestrel()
+            .UseStartup<Startup>()
+            .UseConfiguration(config)
+            .Build();
+        host.Run();
+        }
+    }
+
+    public class Startup
+    {
+        public Startup(IHostingEnvironment env) { } 
+        public void Configure(IApplicationBuilder app, 
+        IHostingEnvironment env, ILoggerFactory loggerFactory)
+        {
+            app.Run(async (context) => { await context.Response.WriteAsync("Hello World!");});
+        }
+    }
+}
+
+Step 4: Open cmd from HelloWorld folder and restore the project.
+> dotnet restore
+
+Step 5: Build and run the project.
+> dotnet build
+> dotnet run
+
+Step 6: Copy the first "http://localhost:XXXX" url and paste it in browser to get output.
